@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { usePlayer } from '../contexts/PlayerContext';
-import { getCoverUrl, formatTime, fetchSoundCloudAPI } from '../utils/soundcloud';
+import { getCoverUrl } from '../utils/soundcloud';
 import './FullscreenPlayer.css';
 
 const FullscreenPlayer: React.FC = () => {
@@ -93,28 +93,6 @@ const FullscreenPlayer: React.FC = () => {
       // Конвертируем в HSL для лучшего контроля
       const hsl = rgbToHsl(r, g, b);
       
-      // Адаптивное затемнение в зависимости от исходной яркости
-      let darkenFactor: number;
-      let saturationFactor: number;
-      
-      if (avgBrightness > 180) {
-        // Очень светлая обложка - умеренное затемнение
-        darkenFactor = 0.7;
-        saturationFactor = 1.4;
-      } else if (avgBrightness > 120) {
-        // Средне-светлая обложка - среднее затемнение
-        darkenFactor = 0.6;
-        saturationFactor = 1.3;
-      } else if (avgBrightness > 80) {
-        // Средняя яркость - небольшое затемнение
-        darkenFactor = 0.5;
-        saturationFactor = 1.2;
-      } else {
-        // Темная обложка - минимальное затемнение
-        darkenFactor = 0.4;
-        saturationFactor = 1.1;
-      }
-      
       // Применяем изменения - БЕЗ ЗАТЕМНЕНИЯ
       hsl[1] = Math.min(1, hsl[1] * 1.1); // Небольшое увеличение насыщенности
       // Яркость оставляем как есть - НЕ ЗАТЕМНЯЕМ
@@ -122,7 +100,7 @@ const FullscreenPlayer: React.FC = () => {
       const [finalR, finalG, finalB] = hslToRgb(hsl[0], hsl[1], hsl[2]);
       
       return `rgb(${Math.round(finalR)}, ${Math.round(finalG)}, ${Math.round(finalB)})`;
-    } catch (e) {
+    } catch (e: unknown) {
       // Если CORS блокирует доступ, используем fallback метод
       return getColorFromUrl(imgElement.src);
     }

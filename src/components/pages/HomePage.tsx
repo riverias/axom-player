@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { usePlayer } from '../../contexts/PlayerContext';
 import { searchSoundCloud } from '../../utils/soundcloud';
 import { getMyWaveQueue } from '../../utils/mywave';
-import TrackItem from '../TrackItem';
 import './HomePage.css';
 
 interface PanelState {
