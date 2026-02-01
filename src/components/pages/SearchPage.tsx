@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { usePlayer } from '../../contexts/PlayerContext';
-import { searchSoundCloud, formatTime, getCoverUrl } from '../../utils/soundcloud';
-import TrackItem from '../TrackItem';
+import { searchSoundCloud } from '../../utils/soundcloud';
+import TrackItem from '../TrackItem.tsx';
 import './SearchPage.css';
 
 const SearchPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [searchTimeout, setSearchTimeout] = useState<number | null>(null);
   const { 
     searchResults, 
     setSearchResults, 
     isSearching, 
-    setIsSearching,
-    playTrack 
+    setIsSearching
   } = usePlayer();
 
   const handleSearch = async (query: string) => {
@@ -50,17 +49,13 @@ const SearchPage: React.FC = () => {
     setSearchTimeout(timeout);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (searchTimeout) {
         clearTimeout(searchTimeout);
       }
       handleSearch(searchQuery);
     }
-  };
-
-  const handleTrackPlay = (track: any, index: number) => {
-    playTrack(track, searchResults, index);
   };
 
   useEffect(() => {
@@ -132,7 +127,7 @@ const SearchPage: React.FC = () => {
             placeholder="Введите название песни..."
             value={searchQuery}
             onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
           />
           <img src="/images/search.svg" alt="Поиск" className="search-icon" />
         </div>

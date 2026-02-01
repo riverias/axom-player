@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePlayer } from '../../contexts/PlayerContext';
 import { getCoverUrl } from '../../utils/soundcloud';
-import TrackItem from '../TrackItem';
+import TrackItem from '../TrackItem.tsx';
 import './PlaylistsPage.css';
 
 const PlaylistsPage: React.FC = () => {
@@ -9,10 +9,8 @@ const PlaylistsPage: React.FC = () => {
     playlists, 
     currentTrack,
     createPlaylist, 
-    deletePlaylist, 
     playPlaylist,
     addTrackToPlaylist,
-    removeTrackFromPlaylist,
     downloadPlaylist,
     playlistShuffleEnabled,
     playlistRepeatMode,
