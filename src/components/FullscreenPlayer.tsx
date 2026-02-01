@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { usePlayer } from '../contexts/PlayerContext';
-import { getCoverUrl } from '../utils/soundcloud';
+import { getCoverUrl, formatTime } from '../utils/soundcloud';
 import './FullscreenPlayer.css';
 
 const FullscreenPlayer: React.FC = () => {
@@ -86,9 +86,6 @@ const FullscreenPlayer: React.FC = () => {
       // Берем самый частый значимый цвет
       const dominantColorData = significantColors[0][1];
       let { r, g, b } = dominantColorData;
-      
-      // Определяем общую яркость обложки
-      const avgBrightness = (r + g + b) / 3;
       
       // Конвертируем в HSL для лучшего контроля
       const hsl = rgbToHsl(r, g, b);
