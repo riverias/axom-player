@@ -189,8 +189,8 @@ const FullscreenPlayer: React.FC = () => {
       try {
         const dominantColor = extractDominantColor(coverImage);
         fullscreenPlayerRef.current.style.backgroundColor = dominantColor;
-      } catch (e) {
-        console.warn('Не удалось извлечь цвет из обложки (CORS):', e.message);
+      } catch (e: unknown) {
+        console.warn('Не удалось извлечь цвет из обложки (CORS):', e instanceof Error ? e.message : 'Unknown error');
         // Fallback: используем градиент по умолчанию
         fullscreenPlayerRef.current.style.backgroundColor = '#111111';
       }
