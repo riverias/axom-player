@@ -19,9 +19,6 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, index, queue, onPlay, hide
     currentTrack, 
     isPlaying, 
     playTrack, 
-    playlists, 
-    addTrackToPlaylist, 
-    showToast,
     activeContextMenu,
     setActiveContextMenu,
     toggleLike,
@@ -55,7 +52,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, index, queue, onPlay, hide
     setActiveContextMenu(null);
     try {
       const trackUrl = track.permalink_url || `https://soundcloud.com/${track.user.username}/${track.title.toLowerCase().replace(/\s+/g, '-')}`;
-      const result = await invoke('download_track', {
+      await invoke('download_track', {
         url: trackUrl,
         title: track.title,
         artist: track.user.username
