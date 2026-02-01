@@ -2,6 +2,38 @@ use tauri::{Window, Emitter};
 use std::process::Command;
 use std::path::PathBuf;
 
+mod protection;
+
+#[cfg(not(debug_assertions))]
+use protection::AntiDebug;
+
+#[tauri::command]
+async fn check_for_updates(app: tauri::AppHandle) -> Result<String, String> {
+    check_for_updates_internal(app).await
+}
+
+async fn check_for_updates_internal(app: tauri::AppHandle) -> Result<String, String> {
+    use tauri_plugin_updater::UpdaterExt;
+    
+    match app.updater() {
+        Ok(updater) => {
+            match updater.check().await {
+                Ok(Some(update)) => {
+                    match update.download_and_install(|_chunk_length, _content_length| {}, || {}).await {
+                        Ok(_) => {
+                            std::process::exit(0);
+                        }
+                        Err(e) => Err(format!("Failed to install update: {}", e)),
+                    }
+                }
+                Ok(None) => Ok("No updates available".to_string()),
+                Err(e) => Err(format!("Failed to check for updates: {}", e)),
+            }
+        }
+        Err(e) => Err(format!("Updater not available: {}", e)),
+    }
+}
+
 #[tauri::command]
 fn minimize_window(window: Window) {
     window.minimize().unwrap();
@@ -197,11 +229,32 @@ fn greet(name: &str) -> String {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    #[cfg(not(debug_assertions))]
+    {
+        let mut protection = AntiDebug::new();
+        protection.start_protection();
+        
+        if !AntiDebug::verify_integrity() {
+            std::process::exit(1);
+        }
+    }
+    
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
-        .invoke_handler(tauri::generate_handler![greet, minimize_window, maximize_window, close_window, download_track, download_playlist])
+        .invoke_handler(tauri::generate_handler![greet, minimize_window, maximize_window, close_window, download_track, download_playlist, check_for_updates])
+        .setup(|app| {
+            #[cfg(not(debug_assertions))]
+            {
+                let handle = app.handle().clone();
+                tauri::async_runtime::spawn(async move {
+                    tokio::time::sleep(tokio::time::Duration::from_secs(3)).await;
+                    let _ = check_for_updates_internal(handle).await;
+                });
+            }
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

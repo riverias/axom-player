@@ -11,6 +11,10 @@ lto = true
 codegen-units = 1
 panic = "abort"
 strip = true
+# Дополнительные флаги для обфускации
+overflow-checks = false
+debug = false
+debug-assertions = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -32,4 +36,8 @@ tauri-plugin-updater = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 dirs = "5.0"
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["winnt", "processthreadsapi", "psapi", "debugapi", "handleapi", "minwindef"] }
+tokio = { version = "1", features = ["time"] }
 
