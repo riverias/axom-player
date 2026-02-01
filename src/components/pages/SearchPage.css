@@ -1,0 +1,220 @@
+.search-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-container {
+  height: 42px;
+  width: 60%;
+  max-width: 700px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.search-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #1a1a1a 0%, #0a0a0a 100%);
+  border: 2px solid #0c0c0c;
+  border-radius: 15px;
+  padding: 0 50px 0 18px;
+  color: white;
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.3s ease;
+  -webkit-app-region: no-drag;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.search-input:focus {
+  border-color: #151515;
+  box-shadow: 0 0 0 2px rgba(21, 21, 21, 0.3);
+}
+
+.search-input::placeholder {
+  color: #666;
+}
+
+.search-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  filter: brightness(0.7);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.search-results {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 20px;
+  padding: 0 30px 20px 30px;
+}
+
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 220px;
+}
+
+.loading, .no-results {
+  text-align: center;
+  color: #888;
+  padding: 40px;
+  font-size: 14px;
+}
+
+.img-404 {
+  margin: 76px auto 0 auto;
+  display: block;
+  max-width: 260px;
+  width: 42vw;
+  opacity: 0.92;
+  filter: drop-shadow(0 8px 32px #111a);
+  pointer-events: none;
+}
+
+/* Skeleton shimmer карточки треков */
+.track-skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 260px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.track-skeleton {
+  min-width: 510px;
+  max-width: 960px;
+  width: 100%;
+  min-height: 62px;
+  height: 62px;
+  margin: 0 auto;
+  background: #181818;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 2px 17px #0005;
+  overflow: hidden;
+  padding-left: 28px;
+  padding-right: 36px;
+  box-sizing: border-box;
+}
+
+.track-skeleton-number {
+  display: block;
+  width: 28px;
+  height: 15px;
+  border-radius: 7px;
+  margin-right: 17px;
+  background: #232323;
+  opacity: 0.86;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.track-skeleton-number-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 10%, rgba(255,255,255,0.13) 40%, rgba(255,255,255,0.42) 70%, transparent 100%);
+  animation: skeletonShimmerNum 1.3s infinite linear;
+}
+
+@keyframes skeletonShimmerNum {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.track-skeleton .circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #23232b;
+  margin-right: 18px;
+  flex-shrink: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.track-skeleton .lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  justify-content: center;
+  min-width: 110px;
+}
+
+.track-skeleton .line1,
+.track-skeleton .line2 {
+  height: 10px;
+  border-radius: 7px;
+  background: #232323;
+  width: 92%;
+  margin: 0;
+  opacity: .82;
+}
+
+.track-skeleton .line1 {
+  width: 51%;
+  background: #242426;
+}
+
+.track-skeleton .line2 {
+  width: 32%;
+  background: #232323;
+}
+
+.track-skeleton .duration {
+  width: 31px;
+  height: 10px;
+  border-radius: 6px;
+  background: #232323;
+  margin-left: auto;
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+.track-skeleton-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(110deg, transparent 15%, rgba(255,255,255,0.09) 30%, rgba(255,255,255,0.23) 52%, transparent 73%);
+  animation: skeletonShimmer 1.4s infinite linear;
+}
+
+@keyframes skeletonShimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}

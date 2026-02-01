@@ -1,0 +1,92 @@
+.title-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background-color: #101010;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  border-bottom: 1px solid #171717;
+  box-sizing: border-box;
+}
+
+.window-title {
+  color: #808080;
+  font-size: 14px;
+  margin-left: 15px;
+}
+
+.window-controls {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 30px;
+  display: flex;
+  z-index: 1001;
+}
+
+.window-btn {
+  width: 45px;
+  height: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.window-btn img {
+  width: 16px;
+  height: 16px;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  top: 7px;
+  left: 14.5px;
+}
+
+.window-btn.maximize img {
+  filter: brightness(0.78);
+}
+
+.window-btn.maximize:hover img.hover {
+  filter: brightness(1.23) drop-shadow(0px 0px 7px #fff);
+}
+
+.window-btn.minimize img,
+.window-btn.close img {
+  filter: brightness(0.7);
+}
+
+.window-btn img.hover {
+  opacity: 0;
+}
+
+.window-btn:hover img.default {
+  opacity: 0;
+}
+
+.window-btn:hover img.hover {
+  opacity: 1;
+}
+
+.window-btn.maximize:hover img.hover {
+  filter: brightness(0.4);
+}
+
+.window-btn.minimize:hover img.hover,
+.window-btn.close:hover img.hover {
+  filter: brightness(1);
+}
+
+.window-btn.maximize {
+  cursor: pointer;
+}
+
+.window-btn.maximize:hover {
+  background-color: transparent !important;
+}

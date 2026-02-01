@@ -1,0 +1,28 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "http-capability",
+  "description": "HTTP capability for SoundCloud API",
+  "windows": ["main"],
+  "permissions": [
+    {
+      "identifier": "http:allow-fetch",
+      "allow": [
+        {
+          "url": "https://soundcloud.com/**"
+        },
+        {
+          "url": "https://api-v2.soundcloud.com/**"
+        },
+        {
+          "url": "https://a-v2.sndcdn.com/**"
+        },
+        {
+          "url": "https://cf-hls-media.sndcdn.com/**"
+        },
+        {
+          "url": "https://cf-media.sndcdn.com/**"
+        }
+      ]
+    }
+  ]
+}

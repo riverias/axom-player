@@ -1,0 +1,10 @@
+.main-content {
+  position: fixed;
+  left: 60px;
+  top: 30px;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  overflow: hidden;
+  box-sizing: border-box;
+}

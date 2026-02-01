@@ -1,0 +1,223 @@
+.home-page { 
+  position: relative; 
+  background: linear-gradient(180deg,#070707,#050505);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Панели виджетов - точная копия из оригинала */
+.panels-row { 
+  position: absolute; 
+  top: 18px; 
+  left: 18px; 
+  display: flex; 
+  gap: 12px; 
+  align-items: center; 
+  z-index: 30; 
+}
+
+.small-panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #121214 0%, #070707 100%);
+  border: 1px solid rgba(255,255,255,0.02);
+  border-radius: 18px;
+  padding: 6px 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: box-shadow 0.12s ease;
+  width: auto;
+  height: 36px;
+  -webkit-app-region: no-drag;
+}
+
+.small-panel:hover { 
+  box-shadow: 0 8px 22px rgba(0,0,0,0.6); 
+}
+
+.for-you-widget {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #141416 0%, #0a0a0b 100%);
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: 22px;
+  padding: 6px 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: box-shadow 0.14s ease, background 0.14s ease;
+  -webkit-app-region: no-drag;
+}
+
+.panel-covers { 
+  display: flex; 
+  gap: 6px; 
+  align-items: center; 
+  position: relative; 
+}
+
+.panel-cover { 
+  width: 26px; 
+  height: 26px; 
+  border-radius: 50%; 
+  overflow: hidden; 
+  border: 1px solid rgba(255,255,255,0.03); 
+  background: #0f0f10; 
+}
+
+.panel-cover img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block; 
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.panel-covers .panel-cover:nth-child(2) { 
+  margin-left: -10px; 
+  z-index: 2; 
+  transform: translateX(-3px); 
+  box-shadow: 0 5px 14px rgba(0,0,0,0.6); 
+}
+
+.panel-title { 
+  color: #e8e8e8; 
+  font-weight: 700; 
+  font-family: 'Poppins', Arial, sans-serif; 
+  font-size: 12px; 
+}
+
+.fyw-covers { 
+  display: flex; 
+  gap: 6px; 
+  align-items: center; 
+  position: relative; 
+}
+
+.fyw-cover { 
+  width: 30px; 
+  height: 30px; 
+  border-radius: 50%; 
+  overflow: hidden; 
+  border: 1px solid rgba(255,255,255,0.03); 
+  background: #0f0f10; 
+}
+
+.fyw-cover img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block; 
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+#fyw-covers .fyw-cover:nth-child(2) { 
+  margin-left: -12px; 
+  z-index: 2; 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.7); 
+  transform: translateX(-4px); 
+}
+
+#fyw-covers .fyw-cover:nth-child(1) { 
+  z-index: 1; 
+}
+
+.fyw-info { 
+  display: flex; 
+  flex-direction: column; 
+}
+
+.fyw-title { 
+  color: #ffffff; 
+  font-weight: 700; 
+  font-family: 'Poppins', Arial, sans-serif; 
+  font-size: 12px; 
+}
+
+/* Анимация вращения для активных обложек */
+@keyframes rotateRecord {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.panel-cover.rotating img,
+.fyw-cover.rotating img {
+  animation: rotateRecord 6s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.home-center { 
+  position: relative; 
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  overflow: hidden; 
+  pointer-events: none; 
+}
+
+.home-sections {
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.home-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-title {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  padding-left: 8px;
+}
+
+.tracks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+
+
+
+@media (max-width:800px){ 
+  .blob.b1,.blob.b2,.blob.b3{ 
+    width:160px;
+    height:160px; 
+    filter: blur(28px); 
+  } 
+  .home-overlay{ 
+    top:50%; 
+  } 
+  .wave-label{ 
+    font-size:16px 
+  } 
+  .wave-play-btn{ 
+    width:40px;
+    height:40px 
+  } 
+  .for-you-widget{ 
+    display:none; 
+  } 
+}
+
